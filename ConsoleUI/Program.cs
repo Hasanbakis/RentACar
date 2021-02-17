@@ -9,53 +9,47 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            //BrandTest();
+           
             //BrandTest2();
-            //ColorTest();
+            
             //Data Transformation Object
-
             DTO();
 
 
         }
 
         private static void DTO()
-        {
+        {   
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarDetails())
+            var result = carManager.GetCarDetails();
+            if(result.Success)
             {
-                Console.WriteLine("{0} : {1} : {2} : {3}", car.BrandName, car.CarName, car.ColorName, car.DailyPrice);
-
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine("{0} : {1} : {2} : {3}", car.BrandName, car.CarName, car.ColorName, car.DailyPrice);
+                }
+                
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+           
+            
+               
+
+            
         }
 
-        private static void ColorTest()
-        {
-            ColorManager colorManager = new ColorManager(new EfColorDal());
-            foreach (var color in colorManager.GetAll())
-            {
-                Console.WriteLine(color.ColorName);
-
-            }
-        }
+       
 
         private static void BrandTest2()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             var brand = brandManager.GetById(3);
-            Console.WriteLine(brand.BrandName);
+            Console.WriteLine(brand);
         }
 
-        private static void BrandTest()
-        {
-            BrandManager brandManager = new BrandManager(new EfBrandDal());
-
-            foreach (var brand in brandManager.GetAll())
-            {
-                Console.WriteLine(brand.BrandName);
-
-            }
-        }
 
 
     }
