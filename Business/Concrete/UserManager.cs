@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constantss;
 using Core.Ultities;
 using Core.Ultities.Results;
 using DataAccess.Abstract;
@@ -9,36 +10,37 @@ using System.Text;
 
 namespace Business.Concrete
 {
-    public class ColorManager : IColorService
+    public class UserManager : IUserService
     {
-        IColorDal _colorDal;
+        IUserDal _userDal;
 
-        public ColorManager(IColorDal colorDal)
+        public UserManager(IUserDal userDal)
         {
-            _colorDal = colorDal;
+            _userDal = userDal;
         }
 
-        public IResult Add(Color color)
+        public IResult Add(User user)
         {
-            throw new NotImplementedException();
+            _userDal.Add(user);
+            return new SuccessResult(Messages.UserAdded);
         }
 
-        public IResult Delete(Color color)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IDataResult<List<Color>> GetAll()
+        public IResult Delete(User user)
         {
             throw new NotImplementedException();
         }
 
-        public IDataResult<Color> GetById(int colorId)
+        public IDataResult<List<User>> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public IResult Update(Color color)
+        public IDataResult<User> GetById(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IResult Update(User user)
         {
             throw new NotImplementedException();
         }

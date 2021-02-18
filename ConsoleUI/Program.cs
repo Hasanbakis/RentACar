@@ -9,48 +9,67 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-           
-            //BrandTest2();
-            
-            //Data Transformation Object
-            DTO();
-
-
-        }
-
-        private static void DTO()
-        {   
-            CarManager carManager = new CarManager(new EfCarDal());
-            var result = carManager.GetCarDetails();
-            if(result.Success)
-            {
-                foreach (var car in result.Data)
-                {
-                    Console.WriteLine("{0} : {1} : {2} : {3}", car.BrandName, car.CarName, car.ColorName, car.DailyPrice);
-                }
-                
-            }
-            else
-            {
-                Console.WriteLine(result.Message);
-            }
-           
-            
-               
-
-            
-        }
-
-       
-
-        private static void BrandTest2()
-        {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            var brand = brandManager.GetById(3);
-            Console.WriteLine(brand);
+            CarManager carManager = new CarManager(new EfCarDal());
+            ColorManager colorManager = new ColorManager(new EfColorDal());
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            UserManager userManager = new UserManager(new EfUserDal());
+
+            //BrandTest2();
+            //Data Transformation Object
+           // AddTest(rentalManager);
+            //GetCarDetailDto(carManager);
+            UserAdd(userManager);
+
+
+
+            //var result = brandManager.Delete(new Brand { ID = 4 });
+            //Console.WriteLine(result.Message);
+
+
+        }
+        private static void AddTest(RentalManager rentalManager)
+        {
+            var result = rentalManager.Add(new Rental {
+                RentalId = 3,
+                CarId = 1,
+                CustomerId = 1
+            });
+            Console.WriteLine(result.Message);
+        }
+        private static void UserAdd(UserManager userManager)
+        {
+            var result = userManager.Add( new User {
+                UserId = 9,
+                FirstName = "Davut",
+                LastName = "Gökalp",
+                Email = "ahmetylmz01@gmail.com",
+                Password = "12345"
+            });
+            Console.WriteLine(result.Message);
+        }
+
+        private static void GetCarDetailDto(CarManager carManager)
+        {
+            foreach (var car in carManager.GetCarDetails().Data)
+            {
+                Console.WriteLine(car.CarId + "\t" + car.CarName + "\t" + car.ColorName + "\t" + car.DailyPrice);
+            }
         }
 
 
 
     }
+   
+
+
+
+
+       
+
+     
+
+
 }
+
+

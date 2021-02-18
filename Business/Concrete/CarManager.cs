@@ -75,6 +75,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId));
         }
 
-       
+        public IResult Update(Car car)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

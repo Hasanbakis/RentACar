@@ -14,6 +14,9 @@ namespace Business.Constantss
         public static string BrandDeleted = "The brand was deleted";
         public static string BrandListed = "Brands listed";
         public static string BrandNameInvalid = "Brand name is invalid";
+        public static string RentaCar = "The car rented";
+        public static string RentaCarInvalid = "The car has not delivered yet";
+        public static string UserAdded = "User added";
 
 
 
