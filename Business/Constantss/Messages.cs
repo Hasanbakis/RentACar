@@ -17,6 +17,7 @@ namespace Business.Constantss
         public static string RentaCar = "The car rented";
         public static string RentaCarInvalid = "The car has not delivered yet";
         public static string UserAdded = "User added";
+        public static string CarUpdated = "The car ";
 
 
 

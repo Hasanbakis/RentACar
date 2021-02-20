@@ -46,6 +46,11 @@ namespace Business.Concrete
             _carDal.Delete(car);
             return new SuccessResult(Messages.CarDeleted);
         }
+        public IResult Update(Car car)
+        {
+            _carDal.Update(car);
+            return new SuccessResult();
+        }
 
         public IDataResult <List<Car>> GetAll()
         { //here are the rules
@@ -58,7 +63,7 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<CarDetailDto>>(Messages.CarNameInvalid);
             }
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(), Messages.CarNameInvalid);
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(), Messages.CarListed);
         }
 
      
@@ -75,9 +80,6 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId));
         }
 
-        public IResult Update(Car car)
-        {
-            throw new NotImplementedException();
-        }
+   
     }
 }
