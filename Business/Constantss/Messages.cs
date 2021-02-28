@@ -18,9 +18,6 @@ namespace Business.Constantss
         public static string RentaCarInvalid = "The car has not delivered yet";
         public static string UserAdded = "User added";
         public static string CarUpdated = "The car ";
-
-
-
-
+        internal static string ImageLimitExceeded= "Up to 5 images can be added";
     }
 }
