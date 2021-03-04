@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using Core.Entites.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
@@ -9,17 +10,17 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            BrandManager brandManager = new BrandManager(new EfBrandDal());
-            CarManager carManager = new CarManager(new EfCarDal());
-            ColorManager colorManager = new ColorManager(new EfColorDal());
-            RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            UserManager userManager = new UserManager(new EfUserDal());
+            //BrandManager brandManager = new BrandManager(new EfBrandDal());
+            //CarManager carManager = new CarManager(new EfCarDal());
+            //ColorManager colorManager = new ColorManager(new EfColorDal());
+            //RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            //UserManager userManager = new UserManager(new EfUserDal());
 
             //BrandTest2();
             //Data Transformation Object
            // AddTest(rentalManager);
             //GetCarDetailDto(carManager);
-            UserAdd(userManager);
+            //UserAdd(userManager);
 
 
 
@@ -40,11 +41,11 @@ namespace ConsoleUI
         private static void UserAdd(UserManager userManager)
         {
             var result = userManager.Add( new User {
-                UserId = 9,
+            
                 FirstName = "Davut",
                 LastName = "Gökalp",
                 Email = "ahmetylmz01@gmail.com",
-                Password = "12345"
+                
             });
             Console.WriteLine(result.Message);
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Entites.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,6 +7,7 @@ namespace Business.Constantss
 {
     public static class Messages
     {
+        internal static readonly User UserNotFound;
         public static string CarAdded = "Car added";
         public static string CarNameInvalid = "The car name is invalid";
         public static string CarListed = "Cars listed";
@@ -18,6 +20,13 @@ namespace Business.Constantss
         public static string RentaCarInvalid = "The car has not delivered yet";
         public static string UserAdded = "User added";
         public static string CarUpdated = "The car ";
-        internal static string ImageLimitExceeded= "Up to 5 images can be added";
+        public static string ImageLimitExceeded= "Up to 5 images can be added";
+        public static string UserDeleted = "User deleted";
+        public static string UserUpdated="User updated";
+        public static string PasswordError = "Password is wrong";
+        public static string SuccesfulLogin = "Successfully logged in";
+        public static string UserAlreadyExists = "this user already exists";
+        public static string UserRegistered = "User registed";
+        public static string AccessTokenCreated = "Token created";
     }
 }
