@@ -1,8 +1,11 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constantss;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
-using Core.CrossCuttingConcerns.Validation;
 using Core.Ultities;
 using Core.Ultities.Results;
 using DataAccess.Abstract;
@@ -23,7 +26,10 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
+
+        [SecuredOperation("car.add,admin")]
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Add(Car car)
         {
             //ValidationTool.Validate(new CarValidator(), car);
@@ -46,12 +52,17 @@ namespace Business.Concrete
             _carDal.Delete(car);
             return new SuccessResult(Messages.CarDeleted);
         }
+
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Update(Car car)
         {
             _carDal.Update(car);
             return new SuccessResult();
         }
-
+ 
+        [SecuredOperation("car.list")]
+        [CacheAspect(duration: 10)]
+        [PerformanceAspect(5)]
         public IDataResult <List<Car>> GetAll()
         { //here are the rules
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Messages.CarListed);
@@ -66,8 +77,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(), Messages.CarListed);
         }
 
-     
 
+        [CacheAspect]
+        [PerformanceAspect(5)]
         public IDataResult  <List<Car>> GetCarsByBrandId(int brandId)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == brandId));
@@ -80,6 +92,16 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId));
         }
 
-   
+        [TransactionScopeAspect]
+        public IResult AddTransactionalTest(Car car)
+        {
+            Add(car);
+            if(car.DailyPrice<0)
+            {
+                throw new Exception("");
+            }
+            Add(car);
+            return null;
+        }
     }
 }

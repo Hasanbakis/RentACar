@@ -1,6 +1,7 @@
 ﻿using Core.Entites.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Business.Constantss
@@ -28,5 +29,6 @@ namespace Business.Constantss
         public static string UserAlreadyExists = "this user already exists";
         public static string UserRegistered = "User registed";
         public static string AccessTokenCreated = "Token created";
+        public static string AuthorizationDenied = "you are not authorized";
     }
 }
