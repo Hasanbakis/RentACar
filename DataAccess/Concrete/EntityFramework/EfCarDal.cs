@@ -13,11 +13,11 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCarDal : EfEntityRepositoryBase<Car, SouthwindContext>, ICarDal
     {
-        public List<CarDetailDto> GetCarDetails()
+        public List<CarDetailDto> GetAllCarDetails(Expression<Func<Car,bool>>filter=null)
         {
             using (SouthwindContext context = new SouthwindContext())
             {
-                var result = from c in context.Cars
+                var result = from c in filter==null ? context.Cars :context.Cars.Where(filter)
                              join b in context.Brands
                              on c.BrandId equals b.BrandId
                              join r in context.Colors
@@ -33,5 +33,7 @@ namespace DataAccess.Concrete.EntityFramework
                 return result.ToList();
             }
         }
+
+       
     }
 }
