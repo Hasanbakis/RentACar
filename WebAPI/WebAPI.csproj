@@ -13,5 +13,17 @@
     <ProjectReference Include="..\Business\Business.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\Images\0a7d984f-7d7c-46b6-b05b-e3275cd259d8_2_28_2021.jpg" />
+    <None Include="wwwroot\Images\1441dfe9-8c21-42c5-96a0-d3557a7197f1_2_28_2021.jpg" />
+    <None Include="wwwroot\Images\3c26c905-96c4-4adf-84c2-064aab629e57_2_28_2021.jpg" />
+    <None Include="wwwroot\Images\481aaf48-1864-4b23-b448-6505b56f4747_2_28_2021.jpg" />
+    <None Include="wwwroot\Images\6f9e9633-7579-4e38-b374-d4bdc5985815_2_28_2021.jpg" />
+    <None Include="wwwroot\Images\72a5dda7-d100-4c93-832d-891ffd3139da_2_28_2021.jpg" />
+    <None Include="wwwroot\Images\a05d2319-63d3-44e6-b9d5-bb87edb32482_2_28_2021.jpg" />
+    <None Include="wwwroot\Images\e51a915c-2820-4ce4-9b5f-75408a325244_2_28_2021.jpg" />
+    <None Include="wwwroot\Images\logo.jpg" />
+  </ItemGroup>
+
 
 </Project>

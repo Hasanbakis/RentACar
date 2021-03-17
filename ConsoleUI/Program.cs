@@ -10,6 +10,18 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
+            string deneme = @"C:\Users\Hasan\source\repos\ReCapProject\WebAPI\wwwroot\Images\e6591dadb9ab4285a41ad3decad82932_3_16_2021.jpg";
+            var ayrilmis = deneme.Split('\\');
+            foreach (var item in ayrilmis)
+            {
+                Console.WriteLine(item);
+
+            }
+
+
+
+
+
             //BrandManager brandManager = new BrandManager(new EfBrandDal());
             //CarManager carManager = new CarManager(new EfCarDal());
             //ColorManager colorManager = new ColorManager(new EfColorDal());
