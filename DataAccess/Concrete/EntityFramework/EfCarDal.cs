@@ -13,6 +13,31 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCarDal : EfEntityRepositoryBase<Car, SouthwindContext>, ICarDal
     {
+
+
+        public CarDetailDto GetCarDetail(int carId)
+        {
+            using (SouthwindContext context = new SouthwindContext())
+            {
+                var result = from c in context.Cars.Where(c=>c.CarId == carId)
+                             join cl in context.Colors
+                             on c.ColorId equals cl.ColorId
+                             join d in context.Brands
+                             on c.BrandId equals d.BrandId
+                             select new CarDetailDto
+                             {
+                                 BrandName = d.BrandName,
+                                 ColorName = cl.ColorName,
+                                 DailyPrice = c.DailyPrice,
+                                 Description = c.Description,
+                                 ModelYear = c.ModelYear,
+                                 CarId = c.CarId,
+                                 Status = !context.Rentals.Any(c => c.CarId == carId && c.ReturnDate == null)
+                             };
+
+                return result.SingleOrDefault();
+            }
+        }
         public List<CarDetailDto> GetAllCarDetails(Expression<Func<Car,bool>>filter=null)
         {
             using (SouthwindContext context = new SouthwindContext())
@@ -34,6 +59,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  ModelYear = c.ModelYear,
                                  Description =c.Description,
                                  ImagePath = carImg.ImagePath
+                               
                              };
                 return result.ToList();
             }

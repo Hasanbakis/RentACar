@@ -1,4 +1,5 @@
 ﻿using Core.Entites.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -30,5 +31,10 @@ namespace Business.Constantss
         public static string UserRegistered = "User registed";
         public static string AccessTokenCreated = "Token created";
         public static string AuthorizationDenied = "you are not authorized";
+        public static string CarNotAvailable = "The car not available";
+        internal static string CarDeliverTheCar;
+        internal static string GetSucccesRentalMessage;
+        internal static List<RentalDetailDto> GetErrorRentalMesssage;
+        public static string SuccessfullyPaid = "Payment transaction completed";
     }
 }
