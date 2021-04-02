@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constantss;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.Ultities;
@@ -24,13 +25,13 @@ namespace Business.Concrete
         public IResult Add(Color color)
         {
             _colorDal.Add(color);
-            return new SuccessResult();
+            return new SuccessResult(Messages.SuccessfullyAdded);
         }
         
         public IResult Delete(Color color)
         {
             _colorDal.Delete(color);
-            return new SuccessResult();
+            return new SuccessResult(Messages.SuccessfullyDeleted);
         }
         
         public IDataResult<List<Color>> GetAll()
@@ -46,7 +47,7 @@ namespace Business.Concrete
         public IResult Update(Color color)
         {
             _colorDal.Update(color);
-            return new SuccessResult();
+            return new SuccessResult(Messages.UpdatedSuccessfully);
         }
     }
 }

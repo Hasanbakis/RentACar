@@ -91,33 +91,6 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpGet("getallundeliveredrentaldetails")]
-        public ActionResult GetAllUndeliveredRentalDetails()
-        {
-            var result = _rentalService.GetAllUndeliveredRentalDetails();
-            if (result.Success)
-                return Ok(result);
-            return BadRequest(result);
-        }
-
-        [HttpGet("getalldeliveredrentaldetails")]
-        public ActionResult GetAllDeliveredRentalDetails()
-        {
-            var result = _rentalService.GetAllDeliveredRentalDetails();
-            if (result.Success)
-                return Ok(result);
-            return BadRequest(result);
-        }
-
-        [HttpPost("deliverthecar")]
-        public ActionResult DeliverTheCar(Rental rental)
-        {
-            var result = _rentalService.DeliverTheCar(rental);
-            if (result.Success)
-                return Ok(result);
-            else
-                return BadRequest(result);
-        }
 
     }
 }

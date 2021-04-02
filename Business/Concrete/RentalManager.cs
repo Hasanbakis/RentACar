@@ -52,37 +52,10 @@ namespace Business.Concrete
             
         }
 
-        public IResult DeliverTheCar(Rental entity)
-        {
-            var result = BusinessRules.Run(CanARentalCarBeReturned(entity.CarId));
-            if(result !=null)
-            {
-                return result;
-                
-            }
-            _rentalDal.Update(entity);
-            return new SuccessResult(Messages.CarDeliverTheCar);
-        }
+       
 
      
-        public IDataResult<List<RentalDetailDto>> GetAllDeliveredRentalDetails()
-        {
-            List<RentalDetailDto> rentalDetailDtos = _rentalDal.GetAllRentalDetails(r => r.ReturnDate != null);
-            if (rentalDetailDtos.Count > 0)
-                return new SuccessDataResult<List<RentalDetailDto>>(rentalDetailDtos, Messages.GetSucccesRentalMessage);
-            else
-                return new ErrorDataResult<List<RentalDetailDto>>(Messages.GetErrorRentalMesssage);
-        }
-
-        public IDataResult<List<RentalDetailDto>> GetAllUndeliveredRentalDetails()
-        {
-            List<RentalDetailDto> rentalDetailDtos = _rentalDal.GetAllRentalDetails(r => r.ReturnDate == null);
-            if (rentalDetailDtos.Count > 0)
-                return new SuccessDataResult<List<RentalDetailDto>>(rentalDetailDtos, Messages.GetSucccesRentalMessage);
-            else
-                return new ErrorDataResult<List<RentalDetailDto>>(Messages.GetErrorRentalMesssage);
-        }
-
+       
         public IDataResult<Rental> GetById(int rentalId)
         {
             return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.RentalId == rentalId));
@@ -96,21 +69,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        private IResult WillLeasedCarAvailable(int carId)
-        {
-            if (_rentalDal.Get(r => r.CarId == carId && r.ReturnDate == null) != null)
-                return new ErrorResult(Messages.CarNotAvailable);
-            else
-                return new SuccessResult();
-        }
-
-        private IResult CanARentalCarBeReturned(int carId)
-        {
-            if (_rentalDal.Get(r => r.CarId == carId && r.ReturnDate == null) == null)
-                return new ErrorResult(Messages.CarNotAvailable);
-            else
-                return new SuccessResult();
-        }
+    
 
     }
 }

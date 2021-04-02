@@ -12,7 +12,7 @@ namespace Entities.Concrete
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string ExpirationDate { get; set; }
-        public int CVV { get; set; }
+        public string CVV { get; set; }
 
     }
 }

@@ -9,7 +9,11 @@ namespace Business.Constantss
 {
     public static class Messages
     {
-        internal static readonly User UserNotFound;
+        public static string UserNotFound = "The user could not found";
+        public static string GetErrorRentalMesssage ="Rental error"
+        public static string SuccessfullyAdded = "Successfully added";
+        public static string SuccessfullyDeleted= "Successfully deleted";
+        public static string UpdatedSuccessfully = "Successfully updated";
         public static string CarAdded = "Car added";
         public static string CarNameInvalid = "The car name is invalid";
         public static string CarListed = "Cars listed";
@@ -32,9 +36,7 @@ namespace Business.Constantss
         public static string AccessTokenCreated = "Token created";
         public static string AuthorizationDenied = "you are not authorized";
         public static string CarNotAvailable = "The car not available";
-        internal static string CarDeliverTheCar;
-        internal static string GetSucccesRentalMessage;
-        internal static List<RentalDetailDto> GetErrorRentalMesssage;
         public static string SuccessfullyPaid = "Payment transaction completed";
+        public static string GetSucccesRentalMessage = "Succes rental message";
     }
 }
