@@ -19,52 +19,59 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (SouthwindContext context = new SouthwindContext())
             {
-                var result = from c in context.Cars.Where(c=>c.CarId == carId)
+                var result = from c in context.Cars.Where(c => c.CarId == carId)
                              join cl in context.Colors
                              on c.ColorId equals cl.ColorId
                              join d in context.Brands
                              on c.BrandId equals d.BrandId
-                             join carImg in context.CarImages
-                              on c.CarId equals carImg.CarId
-                             from r in context.Rentals where r.CarId == c.CarId
+                             join r in context.Rentals 
+                             on c.CarId equals r.CarId into gj
+                             from subCar in gj.DefaultIfEmpty()
+                             //join carImg in context.CarImages
+                             // on c.CarId equals carImg.CarId
+                             //from r in context.Rentals where r.CarId == c.CarId
                              select new CarDetailDto
                              {
+                                 CarId = c.CarId,
+                                 ColorId = c.ColorId,
+                                 BrandId = c.BrandId,
                                  BrandName = d.BrandName,
                                  ColorName = cl.ColorName,
                                  DailyPrice = c.DailyPrice,
                                  Description = c.Description,
                                  ModelYear = c.ModelYear,
-                                 CarId = c.CarId,
                                  CarName = c.CarName,
-                                 ImagePath = carImg.ImagePath,
-                                 Status = r.ReturnDate ==null?false:true
+                                 Images = context.CarImages.Where(ci => ci.CarId == c.CarId).Select(i=>i.ImagePath).ToList(),
+                                 //(from i in context.CarImages where i.CarId == c.CarId select i.ImagePath).ToList(),
+                                 Status = DateTime.Now > subCar.ReturnDate
                              };
-
-                return result.SingleOrDefault();
+                return result.FirstOrDefault();
             }
         }
         public List<CarDetailDto> GetAllCarDetails(Expression<Func<Car,bool>>filter=null)
         {
             using (SouthwindContext context = new SouthwindContext())
             {
-                var result = from c in filter==null ? context.Cars :context.Cars.Where(filter)
+                var result = from c in filter==null?context.Cars :context.Cars.Where(filter)
                              join b in context.Brands
                              on c.BrandId equals b.BrandId
                              join r in context.Colors
                              on c.ColorId equals r.ColorId
-                             join carImg in context.CarImages 
-                             on c.CarId equals carImg.CarId
+                             
                              select new CarDetailDto
                              {
                                  CarId=c.CarId,
+                                 ColorId=c.ColorId,
+                                 BrandId= c.BrandId,
                                  BrandName = b.BrandName,
                                  ColorName = r.ColorName,
                                  DailyPrice = c.DailyPrice,
                                  CarName = c.CarName,
                                  ModelYear = c.ModelYear,
                                  Description =c.Description,
-                                 ImagePath = carImg.ImagePath
-                               
+                                 Images =
+                                (from i in context.CarImages where i.CarId == c.CarId select i.ImagePath).ToList(),
+
                              };
                 return result.ToList();
             }

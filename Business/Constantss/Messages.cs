@@ -10,7 +10,7 @@ namespace Business.Constantss
     public static class Messages
     {
         public static string UserNotFound = "The user could not found";
-        public static string GetErrorRentalMesssage ="Rental error"
+        public static string GetErrorRentalMesssage = "Rental error";
         public static string SuccessfullyAdded = "Successfully added";
         public static string SuccessfullyDeleted= "Successfully deleted";
         public static string UpdatedSuccessfully = "Successfully updated";
