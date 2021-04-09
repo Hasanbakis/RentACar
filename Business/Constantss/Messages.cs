@@ -9,6 +9,8 @@ namespace Business.Constantss
 {
     public static class Messages
     {
+         public static string CustomerFindexZero= "Customer findex point zero";
+        public static string FindexListed = "FindexListed";
         public static string UserNotFound = "The user could not found";
         public static string GetErrorRentalMesssage = "Rental error";
         public static string SuccessfullyAdded = "Successfully added";
@@ -38,5 +40,10 @@ namespace Business.Constantss
         public static string CarNotAvailable = "The car not available";
         public static string SuccessfullyPaid = "Payment transaction completed";
         public static string GetSucccesRentalMessage = "Succes rental message";
+        public static string FindexAdded = "FindexAdded";
+        public static string FindexDeleted = "FindexDeleted";
+        internal static string FindexUpdated;
+        internal static string CustomerScoreIsInsufficient = "Customer score is insufficient";
+        internal static string UsersLister;
     }
 }

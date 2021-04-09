@@ -12,6 +12,8 @@ namespace Business.ValidationRules.FluentValidation
         {
             RuleFor(c => c.CompanyName).NotEmpty();
             RuleFor(c => c.CompanyName).MinimumLength(2);
+            RuleFor(customer => customer.FindexPoint).GreaterThanOrEqualTo(0);
+            RuleFor(customer => customer.FindexPoint).LessThanOrEqualTo(1900);
         }
     }
 }

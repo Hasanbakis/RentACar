@@ -27,20 +27,15 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        //[SecuredOperation("car.add,admin")]
+        [SecuredOperation("car.List")]
         //[ValidationAspect(typeof(CarValidator))]
         //[CacheRemoveAspect("ICarService.Get")]
         public IResult Add(Car car)
         {
             //ValidationTool.Validate(new CarValidator(), car);
 
-
-
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
-
-
-
         }
 
         public IResult Delete(Car car)
@@ -127,6 +122,12 @@ namespace Business.Concrete
         public IDataResult<List<CarDetailDto>> GetCarsByBrandAndColorId(int brandId, int colorId)
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetAllCarDetails(b=>b.BrandId == brandId && b.ColorId == colorId));
+        }
+
+        public IDataResult<Car> GetById(int carId)
+        {
+            var getById = _carDal.Get(c => c.CarId == carId);
+            return new SuccessDataResult<Car>(getById);
         }
     }
 }

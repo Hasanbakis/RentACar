@@ -15,7 +15,8 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(c => c.Description).NotEmpty();
             RuleFor(c => c.DailyPrice).GreaterThan(0);
             RuleFor(c => c.DailyPrice).GreaterThanOrEqualTo(10).When(c => c.BrandId == 1);
-           
+            RuleFor(car => car.FindexPoint).GreaterThanOrEqualTo(0);
+            RuleFor(car => car.FindexPoint).LessThanOrEqualTo(1900);
 
         }
 

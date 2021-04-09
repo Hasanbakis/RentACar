@@ -16,18 +16,27 @@ namespace Business.Concrete
 {
     public class RentalManager : IRentalService
     {
-        IRentalDal _rentalDal;
+        private readonly IRentalDal _rentalDal;
+        private readonly ICarService _carService;
+        private readonly ICustomerService _customerService;
 
-        public RentalManager(IRentalDal rentalDal)
+        public RentalManager(IRentalDal rentalDal,ICarService carService,ICustomerService customerService)
         {
             _rentalDal = rentalDal;
+            _carService = carService;
+            _customerService = customerService;
         }
 
-        [ValidationAspect(typeof(RentalValidator))]
+      //  [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
-         
+            var result = BusinessRules.Run(FindexScoreCheck(rental.CustomerId, rental.CarId));
+
+            if (result != null)
+                return result;
+
             _rentalDal.Add(rental);
+
             return new SuccessResult(Messages.RentaCar);
         }
 
@@ -69,7 +78,27 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-    
+        private Result FindexScoreCheck(int customerId, int carId)
+        {
+            var customerFindexPoint = _customerService.GetById(customerId).Data.FindexPoint;
+
+            if (customerFindexPoint == 0)
+            {
+                return new ErrorResult(Messages.CustomerFindexZero);
+            }
+               
+
+            var carFindexPoint = _carService.GetById(carId).Data.FindexPoint;
+
+            if (customerFindexPoint < carFindexPoint)
+            {
+                return new ErrorResult(Messages.CustomerScoreIsInsufficient);
+            }
+              
+
+            return new SuccessResult();
+        }
+
 
     }
 }

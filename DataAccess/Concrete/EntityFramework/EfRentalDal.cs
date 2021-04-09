@@ -30,7 +30,7 @@ namespace DataAccess.Concrete.EntityFramework
                          on car.ColorId equals color.ColorId
                     select new RentalDetailDto
                     {
-                        RentDate = rental.RentDate,
+                        RentDate =(DateTime) rental.RentDate,
                         ReturnDate = rental.ReturnDate,
                         RentalId = rental.RentalId,
                         BrandName = brand.BrandName,

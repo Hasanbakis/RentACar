@@ -41,6 +41,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  Description = c.Description,
                                  ModelYear = c.ModelYear,
                                  CarName = c.CarName,
+                                 FindexPoint = c.FindexPoint,
                                  Images = context.CarImages.Where(ci => ci.CarId == c.CarId).Select(i=>i.ImagePath).ToList(),
                                  //(from i in context.CarImages where i.CarId == c.CarId select i.ImagePath).ToList(),
                                  Status = DateTime.Now > subCar.ReturnDate
@@ -69,6 +70,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  CarName = c.CarName,
                                  ModelYear = c.ModelYear,
                                  Description =c.Description,
+                                 FindexPoint =c.FindexPoint,
                                  Images =
                                 (from i in context.CarImages where i.CarId == c.CarId select i.ImagePath).ToList(),
 
