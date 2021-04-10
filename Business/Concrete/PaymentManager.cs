@@ -19,10 +19,12 @@ namespace Business.Concrete
             _paymentDal = paymentDal;
         }
 
-        public IResult Add(Payment payment)
+        public IResult AddPayTheAmount(Payment payment)
         {
             _paymentDal.Add(payment);
             return new SuccessResult(Messages.SuccessfullyPaid);
         }
+
+        
     }
 }

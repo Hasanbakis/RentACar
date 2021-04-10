@@ -78,7 +78,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        private Result FindexScoreCheck(int customerId, int carId)
+        private IResult FindexScoreCheck(int customerId, int carId)
         {
             var customerFindexPoint = _customerService.GetById(customerId).Data.FindexPoint;
 
